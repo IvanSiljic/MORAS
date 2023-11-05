@@ -1,7 +1,6 @@
 Set Implicit Arguments.
 Require Import List.
 Import ListNotations.
-Require Import Omega.
 
 (* Bit *)
 
