@@ -106,45 +106,55 @@ Definition ALU (x y : list B) (zx nx zy ny f no : B) : list B :=
 
 Lemma ALU_zero (x y : list B) :
   length x = length y -> ALU x y I O I O I O = repeat O (length x).
-Proof. Abort.
+Proof. Admitted.
 
 Lemma ALU_minus_one (x y : list B) : 
   length x = length y -> ALU x y I I I O I O = repeat I (length x).
-Proof. Abort.
+Proof. Admitted.
 
 Lemma ALU_x (x y : list B) : 
   length x = length y -> ALU x y O O I I O O = x.
-Proof. Abort.
+Proof. Admitted.
 
 Lemma ALU_y (x y : list B) : 
   length x = length y -> ALU x y I I O O O O = y.
-Proof. Abort.
+Proof. Admitted.
 
 Lemma ALU_Not_x (x y : list B) : 
   length x = length y -> ALU x y O O I I O I = NotL x.
-Proof. Abort.
+Proof. Admitted.
 
 Lemma ALU_Not_y (x y : list B) : 
   length x = length y -> ALU x y I I O O O I = NotL y.
-Proof. Abort.
+Proof. Admitted.
 
 Lemma ALU_Add (x y : list B) : 
   length x = length y -> ALU x y O O O O I O = AddL x y.
-Proof. Abort.
+Proof. Admitted.
 
 (* DZ *)
 
 Lemma ALU_And (x y : list B) : 
   length x = length y -> ALU x y O O O O O O = AndL x y.
-Proof. Admitted.
+Proof.
+  simpl. intros. reflexivity.
+Qed.
 
 Lemma ALU_Or (x y : list B) : 
   length x = length y -> ALU x y O I O I O I = OrL x y.
-Proof. Admitted.
+Proof.
+  intros. destruct x, y; trivial.
+  - destruct b.
+    + simpl.
+Abort.
 
 Lemma ALU_One (n : nat) (x y : list B) :
   length x = n /\ length y = n /\ n <> 0 -> ALU x y I I I I I I = repeat O (pred n) ++ [I].
-Proof. Admitted.
+Proof.
+  simpl. destruct n.
+  - now simpl.
+  - simpl.
+Abort.
 
 
 
