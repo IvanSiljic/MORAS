@@ -106,31 +106,31 @@ Definition ALU (x y : list B) (zx nx zy ny f no : B) : list B :=
 
 Lemma ALU_zero (x y : list B) :
   length x = length y -> ALU x y I O I O I O = repeat O (length x).
-Proof. Admitted.
+Proof. Abort.
 
 Lemma ALU_minus_one (x y : list B) : 
   length x = length y -> ALU x y I I I O I O = repeat I (length x).
-Proof. Admitted.
+Proof. Abort.
 
 Lemma ALU_x (x y : list B) : 
   length x = length y -> ALU x y O O I I O O = x.
-Proof. Admitted.
+Proof. Abort.
 
 Lemma ALU_y (x y : list B) : 
   length x = length y -> ALU x y I I O O O O = y.
-Proof. Admitted.
+Proof. Abort.
 
 Lemma ALU_Not_x (x y : list B) : 
   length x = length y -> ALU x y O O I I O I = NotL x.
-Proof. Admitted.
+Proof. Abort.
 
 Lemma ALU_Not_y (x y : list B) : 
   length x = length y -> ALU x y I I O O O I = NotL y.
-Proof. Admitted.
+Proof. Abort.
 
 Lemma ALU_Add (x y : list B) : 
   length x = length y -> ALU x y O O O O I O = AddL x y.
-Proof. Admitted.
+Proof. Abort.
 
 (* DZ *)
 
@@ -143,18 +143,48 @@ Qed.
 Lemma ALU_Or (x y : list B) : 
   length x = length y -> ALU x y O I O I O I = OrL x y.
 Proof.
-  intros. destruct x, y; trivial.
-  - destruct b.
-    + simpl.
-Abort.
+  intros. unfold ALU. simpl. 
+  assert(A: forall x y:list B, AndL (NotL x) (NotL y) = NotL(OrL x y)).
+    - induction x0, y0; try reflexivity.
+      + simpl. specialize IHx0 with y0. rewrite IHx0. induction a; reflexivity.
+    - specialize A with x y. rewrite A. 
+      assert(B: forall a : list B, NotL (NotL a) = a).
+      + intros. induction a.
+        ++ reflexivity.
+        ++ simpl. rewrite IHa. induction a; reflexivity.
+      + specialize B with (OrL x y).
+      exact B.
+Qed.
 
 Lemma ALU_One (n : nat) (x y : list B) :
   length x = n /\ length y = n /\ n <> 0 -> ALU x y I I I I I I = repeat O (pred n) ++ [I].
 Proof.
-  simpl. destruct n.
-  - now simpl.
-  - simpl.
-Abort.
+  intros. destruct H.  destruct H0. unfold ALU. simpl. rewrite H, H0.
+  assert(A: forall n, NotL (repeat O n) = repeat I n).
+  - intros. induction n0.
+    + reflexivity.
+    + simpl. rewrite IHn0. reflexivity.
+  - rewrite A.
+    assert(B: AddL (repeat I n) (repeat I n) = repeat I (pred n) ++ [O]).
+    -- induction n.
+       --- simpl. contradiction.
+       --- simpl. unfold AddL. simpl. Search repeat.
+           assert (C: forall (b : B) (n : nat), rev (repeat b n) = repeat b n).
+           + intros. induction n0; try reflexivity. simpl. rewrite IHn0. rewrite repeat_cons. reflexivity.
+           + specialize C with I n. rewrite C. simpl.
+             assert (D: forall (b:B) (n:nat), repeat b n ++ [b] = repeat b (S n)).
+             ++ intros. simpl. rewrite repeat_cons. reflexivity.
+             ++ specialize D with I n. rewrite D. simpl. f_equal. 
+                assert(E: forall n, AddLr (repeat I n) (repeat I n) I = repeat I n).
+                +++ intros. induction n0; try reflexivity. simpl. rewrite IHn0. reflexivity.
+                +++ specialize E with n. rewrite E. rewrite C. reflexivity.
+    -- rewrite B. assert(F: forall a b, NotL(a ++ b) = NotL a ++ NotL b).
+       ++ intros. induction a; try reflexivity. simpl. rewrite IHa. reflexivity.
+       ++ specialize F with (repeat I (pred n)) [O]. rewrite F. simpl. f_equal.
+          assert(G: forall n, NotL (repeat I n) = repeat O n).
+          +++ intros. induction n0;try reflexivity. simpl. rewrite IHn0. reflexivity.
+          +++ specialize G with (pred n). rewrite G. reflexivity.
+Qed.
 
 
 
