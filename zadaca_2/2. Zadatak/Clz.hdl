@@ -1,0 +1,131 @@
+CHIP Clz {
+    IN in[16];
+    OUT out[16];
+
+    PARTS:
+    // 16. bit
+    Or(a = in[15], b = false, out = out0a);
+    Not(in = out0a, out = out0);
+
+    Add16(a[0] = out0, a[1..15] = false, b = false, out = sum0);
+    
+
+    // 15. bit
+    Or(a = in[14], b = false, out = out1b);
+    Not(in = out1b, out = out1a);
+    And(a = out1a, b = out0, out = out1);
+
+    Add16(a[0] = out1, a[1..15] = false, b = sum0, out = sum1);
+    
+
+    // 14. bit
+    Or(a = in[13], b = false, out = out2b);
+    Not(in = out2b, out = out2a);
+    And(a = out2a, b = out1, out = out2);
+
+    Add16(a[0] = out2, a[1..15] = false, b = sum1, out = sum2);
+    
+
+    // 13. bit
+    Or(a = in[12], b = false, out = out3b);
+    Not(in = out3b, out = out3a);
+    And(a = out3a, b = out2, out = out3);
+
+    Add16(a[0] = out3, a[1..15] = false, b = sum2, out = sum3);
+
+
+    // 12. bit
+    Or(a = in[11], b = false, out = out4b);
+    Not(in = out4b, out = out4a);
+    And(a = out4a, b = out3, out = out4);
+
+    Add16(a[0] = out4, a[1..15] = false, b = sum3, out = sum4);
+
+
+    // 11. bit
+    Or(a = in[10], b = false, out = out5b);
+    Not(in = out5b, out = out5a);
+    And(a = out5a, b = out4, out = out5);
+
+    Add16(a[0] = out5, a[1..15] = false, b = sum4, out = sum5);
+
+
+    // 10. bit
+    Or(a = in[9], b = false, out = out6b);
+    Not(in = out6b, out = out6a);
+    And(a = out6a, b = out5, out = out6);
+
+    Add16(a[0] = out6, a[1..15] = false, b = sum5, out = sum6);
+
+
+    // 9. bit
+    Or(a = in[8], b = false, out = out7b);
+    Not(in = out7b, out = out7a);
+    And(a = out7a, b = out6, out = out7);
+
+    Add16(a[0] = out7, a[1..15] = false, b = sum6, out = sum7);
+
+
+    // 8. bit
+    Or(a = in[7], b = false, out = out8b);
+    Not(in = out8b, out = out8a);
+    And(a = out8a, b = out7, out = out8);
+
+    Add16(a[0] = out8, a[1..15] = false, b = sum7, out = sum8);
+
+
+    // 7. bit
+    Or(a = in[6], b = false, out = out9b);
+    Not(in = out9b, out = out9a);
+    And(a = out9a, b = out8, out = out9);
+
+    Add16(a[0] = out9, a[1..15] = false, b = sum8, out = sum9);
+
+
+    // 6. bit
+    Or(a = in[5], b = false, out = out10b);
+    Not(in = out10b, out = out10a);
+    And(a = out10a, b = out9, out = out10);
+
+    Add16(a[0] = out10, a[1..15] = false, b = sum9, out = sum10);
+
+
+    // 5. bit
+    Or(a = in[4], b = false, out = out11b);
+    Not(in = out11b, out = out11a);
+    And(a = out11a, b = out10, out = out11);
+
+    Add16(a[0] = out11, a[1..15] = false, b = sum10, out = sum11);
+
+
+    // 4. bit
+    Or(a = in[3], b = false, out = out12b);
+    Not(in = out12b, out = out12a);
+    And(a = out12a, b = out11, out = out12);
+
+    Add16(a[0] = out12, a[1..15] = false, b = sum11, out = sum12);
+
+
+    // 3. bit
+    Or(a = in[2], b = false, out = out13b);
+    Not(in = out13b, out = out13a);
+    And(a = out13a, b = out12, out = out13);
+
+    Add16(a[0] = out13, a[1..15] = false, b = sum12, out = sum13);
+
+
+    // 2. bit
+    Or(a = in[1], b = false, out = out14b);
+    Not(in = out14b, out = out14a);
+    And(a = out14a, b = out13, out = out14);
+
+    Add16(a[0] = out14, a[1..15] = false, b = sum13, out = sum14);
+
+
+    // 1. bit
+    Or(a = in[0], b = false, out = out15b);
+    Not(in = out15b, out = out15a);
+    And(a = out15a, b = out14, out = out15);
+
+    Add16(a[0] = out15, a[1..15] = false, b = sum14, out = out);
+}
