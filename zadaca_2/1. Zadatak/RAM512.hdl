@@ -21,5 +21,5 @@ CHIP RAM512 {
     Mux8Way16(a = out0, b = out1, 
         c = out2, d = out3, e = out4,
         f = out5, g = out6, h = out7,
-        sel = addr[6..8], out = addrVal);
+        sel = addr[6..8], out = out);
 }
