@@ -12,8 +12,6 @@ def _parse_macro(self, line, p, o):
     if line[0] != "$":
         return line
 
-    print(line)
-
     if line == "$END":
         if not self._while:
             self._flag = False
@@ -21,26 +19,40 @@ def _parse_macro(self, line, p, o):
             self._errm = "Unexpected end of WHILE loop"
             return
 
-        if len(self._while_nested) == 0:
-            self._while = False
-            end = self._while_counter
-        else:
-            end = self._while_nested.pop()
+        end = self._while_nested.pop()
 
         return [f"@WHILE_LOOP_START_{end}",
-                f"0; JMP",
+                f"0;JMP",
                 f"(WHILE_LOOP_END_{end})"
                 ]
 
     command = line[1:].split('(')[0]
+    args = line.split('(')[1].split(')')[0]
+    a = args
+
+    if command == "WHILE":
+        if len(a.strip()) == 0:
+            self._flag = False
+            self._line = o
+            self._errm = "Empty argument A"
+            return
+
+        self._while_counter += 1
+        self._while_nested.append(self._while_counter)
+        self._while = True
+
+        return [f"(WHILE_LOOP_START_{self._while_counter})",
+                f"@{a}",
+                f"D=M;",
+                f"@WHILE_LOOP_END_{self._while_counter}",
+                f"D;JEQ"
+                ]
 
     if len(command) == 0:
         self._flag = False
         self._line = o
         self._errm = "Missing command after $"
         return
-
-    args = line.split('(')[1].split(')')[0]
 
     if len(args) > 2:
         self._flag = False
@@ -133,29 +145,6 @@ def _parse_macro(self, line, p, o):
                 f"D=D+M;",
                 f"@{d}",
                 f"M=D;"]
-
-    elif command == "WHILE":
-        if len(a.strip()) == 0:
-            self._flag = False
-            self._line = o
-            self._errm = "Empty argument A"
-            return
-
-        self._while_counter += 1
-
-        if self._while:
-            self._while_nested.push(self._while_counter)
-        else:
-            self._while = True
-
-        a = args[0].strip()
-
-        return [f"(WHILE_LOOP_START_{self._while_counter})",
-                f"@{a}",
-                f"D=M;",
-                f"@WHILE_LOOP_END_{self._while_counter}",
-                f"D; JEQ"
-                ]
 
     else:
         self._flag = False

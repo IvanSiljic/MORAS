@@ -22,40 +22,40 @@ def _parse_command(self, line, b, o):
         op = ""
         dest = ""
         jmp = ""
-        
+
         l = line.split("=")
         if len(l) > 1:
             dest = l[0]
             l = l[1]
         else:
             l = l[0]
-            
+
         l = l.split(";")
         op = l[0]
         if len(l) > 1:
             jmp = l[1]
-        
+
         if op in self._op:
             op = self._op[op]
         else:
             self._flag = False
             self._line = o
             self._errm = "Invalid operation " + op
-        
+
         if dest in self._dest:
             dest = self._dest[dest]
-        else: 
+        else:
             self._flag = False
             self._line = o
             self._errm = "Invalid destination " + dest
-        
+
         if jmp in self._jmp:
             jmp = self._jmp[jmp]
         else:
             self._flag = False
             self._line = 0
             self._errm = "Invalid jump " + jmp
-        
+
         return "111" + op + dest + jmp
 
 
@@ -98,7 +98,7 @@ def _init_comms(self):
         "M|D": "1010101"
     }
     self._jmp = {
-        "" : "000",
+        "": "000",
         "JGT": "001",
         "JEQ": "010",
         "JGE": "011",
@@ -108,12 +108,12 @@ def _init_comms(self):
         "JMP": "111"
     }
     self._dest = {
-        "" : "000",
-        "M" : "001",
-        "D" : "010",
-        "MD" : "011",
-        "A" : "100",
-        "AM" : "101",
-        "AD" : "110",
-        "AMD" : "111"
+        "": "000",
+        "M": "001",
+        "D": "010",
+        "MD": "011",
+        "A": "100",
+        "AM": "101",
+        "AD": "110",
+        "AMD": "111"
     }
