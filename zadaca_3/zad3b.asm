@@ -13,6 +13,7 @@ M = 0;
     D = M;
     @j
     M = D;
+    M = M + 1;
 
     // Postavljamo min element na i-ti element
     @i
