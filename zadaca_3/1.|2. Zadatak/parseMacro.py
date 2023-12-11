@@ -12,8 +12,6 @@ def _parse_macro(self, line, p, o):
     if line[0] != "$":
         return line
 
-    print(line)
-
     if line == "$END":
         if not self._while:
             self._flag = False
@@ -21,14 +19,10 @@ def _parse_macro(self, line, p, o):
             self._errm = "Unexpected end of WHILE loop"
             return
 
-        if len(self._while_nested) == 0:
-            self._while = False
-            end = self._while_counter
-        else:
-            end = self._while_nested.pop()
+        end = self._while_nested.pop()
 
         return [f"@WHILE_LOOP_START_{end}",
-                f"0; JMP",
+                f"0;JMP",
                 f"(WHILE_LOOP_END_{end})"
                 ]
 
@@ -142,11 +136,8 @@ def _parse_macro(self, line, p, o):
             return
 
         self._while_counter += 1
-
-        if self._while:
-            self._while_nested.push(self._while_counter)
-        else:
-            self._while = True
+        self._while_nested.append(self._while_counter)
+        self._while = True
 
         a = args[0].strip()
 
@@ -154,7 +145,7 @@ def _parse_macro(self, line, p, o):
                 f"@{a}",
                 f"D=M;",
                 f"@WHILE_LOOP_END_{self._while_counter}",
-                f"D; JEQ"
+                f"D;JEQ"
                 ]
 
     else:
