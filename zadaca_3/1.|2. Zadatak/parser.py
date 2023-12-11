@@ -8,6 +8,7 @@
 
 class Parser:
     from parseLines import _parse_lines, _parse_line
+    from parseMacro import _parse_macros, _parse_macro
     from parseComms import _parse_commands, _parse_command, _init_comms
     from parseSymbs import _parse_symbols, _parse_labels, _parse_variables, _init_symbols
     
@@ -39,7 +40,13 @@ class Parser:
         if not self._flag:
             Parser._error("PL", self._line, self._errm)
             return
-        
+
+        # Parsiramo macro naredbe izvornog koda.
+        self._parse_macros()
+        if not self._flag:
+            Parser._error("PM", self._line, self._errm)
+            return
+
         # oznake
         self._labels = {}
         self._variables = {}
@@ -48,7 +55,7 @@ class Parser:
         if not self._flag:
             Parser._error("SYM", self._line, self._errm)
             return
-            
+
         self._parse_commands()
         if not self._flag:
             Parser._error("COM", self._line, self._errm)
@@ -102,11 +109,17 @@ class Parser:
             newline = func(line, i, o)
             if not self._flag:
                 break
-            if len(newline) > 0:
+
+            if isinstance(newline, list):
+                for l in newline:
+                    newlines.append((l, i, o))
+                    i += 1
+            elif len(newline) > 0:
                 newlines.append((newline, i, o))
                 i += 1
         self._lines = newlines
-        
+
+
     @staticmethod
     def _error(src, line, msg):
         if len(src) > 0 and line > -1:
@@ -118,4 +131,4 @@ class Parser:
 
 
 if __name__ == "__main__":
-    Parser("Pong")
+    Parser("test")

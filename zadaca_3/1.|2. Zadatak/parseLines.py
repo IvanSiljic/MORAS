@@ -1,6 +1,7 @@
 def _parse_lines(self):
-    self._comment = False    
+    self._comment = False
     self._iter_lines(self._parse_line)
+
 
 def _parse_line(self, line, p, o):
     l = ""
@@ -8,7 +9,7 @@ def _parse_line(self, line, p, o):
     while i < len(line) - 1:
         p = line[i] + line[i + 1]
 
-        if (not self._comment and p == "/*") or (self._comment and p == "*/"):
+        if not self._comment and p == "/*" or self._comment and p == "*/":
             self._comment = not self._comment
             i += 1
         elif not self._comment and p == "*/":
