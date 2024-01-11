@@ -53,8 +53,8 @@ M=D
 0;JMP
 //function Main 0
 (main.Main)
-//push constant 5
-@5
+//push constant 1
+@1
 D=A
 @SP
 M=M+1

@@ -71,7 +71,7 @@ class Parser:
                 return "//" + " ".join(l) + "\n" + self._push(l[1], l[2], n)
             else:
                 self._flag = False
-                Parser._error("Parser", n, "Undefined command");
+                Parser._error("Parser", n, "Undefined command")
                 return ""
 
         elif l[0] == "pop":
@@ -79,7 +79,7 @@ class Parser:
                 return "//" + " ".join(l) + "\n" + self._pop(l[1], l[2], n)
             else:
                 self._flag = False
-                Parser._error("Parser", n, "Undefined command");
+                Parser._error("Parser", n, "Undefined command")
                 return ""
         
         elif len(l) > 1 or l[0] == "return":
@@ -108,26 +108,32 @@ class Parser:
     #   2. loc - lokacija push-a (npr. local 5, loc = 5),
     #   3. n - linija izvornog koda (radi vracanja greske).
     def _push(self, src, loc, n):
-        if src == "constant":
-            l = "@" + str(loc) + "\nD=A\n"
-        elif src == "local":
-            l = "@" + str(loc) + "\nD=A\n@LCL\nA=D+M\nD=M\n"
-        elif src == "argument":
-            l = "@" + str(loc) + "\nD=A\n@ARG\nA=D+M\nD=M\n"
-        elif src == "this":
-            l = "@" + str(loc) + "\nD=A\n@THIS\nA=D+M\nD=M\n"
-        elif src == "that":
-            l = "@" + str(loc) + "\nD=A\n@THAT\nA=D+M\nD=M\n"
-        elif src == "static":
-            l = "@" + self._name + "." + str(loc) + "\nD=M"
-        elif src == "temp":
-            l = "@" + str(5 + int(loc)) + "\nD=M"
-        elif src == "pointer":
-            l = "@" + str(3 + int(loc)) + "\nD=M"
-        else:
+        if not loc.isdigit() or loc.startswith("0") and len(loc3) != 1:
             self._flag = False
-            Parser._error("Push", n, "Undefined source \"" + src + "\".");
+            Parser._error("Push", n, "Invalid value \"" + loc + "\".");
             return ""
+
+        match src:
+            case "constant":
+                l = "@" + str(loc) + "\nD=A\n"
+            case "local":
+                l = "@" + str(loc) + "\nD=A\n@LCL\nA=D+M\nD=M\n"
+            case "argument":
+                l = "@" + str(loc) + "\nD=A\n@ARG\nA=D+M\nD=M\n"
+            case "this":
+                l = "@" + str(loc) + "\nD=A\n@THIS\nA=D+M\nD=M\n"
+            case "that":
+                l = "@" + str(loc) + "\nD=A\n@THAT\nA=D+M\nD=M\n"
+            case "static":
+                l = "@" + self._name + "." + str(loc) + "\nD=M"
+            case "temp":
+                l = "@" + str(5 + int(loc)) + "\nD=M"
+            case "pointer":
+                l = "@" + str(3 + int(loc)) + "\nD=M"
+            case _:
+                self._flag = False
+                Parser._error("Push", n, "Undefined source \"" + src + "\".");
+                return ""
         return l + "@SP\nM=M+1\nA=M-1\nM=D"
 
     # Funkcija zapisuje asemblerski kod pop naredbe.
@@ -311,11 +317,13 @@ class Parser:
         else:
             print(msg)
 
+
 def main():
     P = Parser()
     P.parseFile("main")
     P.parseFile("sum")
     P.writeFile("test")
+
 
 if __name__ == '__main__':
     main()
