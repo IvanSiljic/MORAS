@@ -1,6 +1,8 @@
 class Parser:
     def __init__(self):
         self._olines = []
+        self._labels = []
+        self._usedLabels = []
         self._lab = 0
         self._flag = True     # Je li parsiranje uspjesno?
 
@@ -16,6 +18,8 @@ class Parser:
         self._lines = [] # Linije koda.
         self._flag = True # Je li parsiranje uspjesno?
         self._func = ""
+        self._labels = []
+        self._usedLabels = []
 
         # Citamo linije koda iz VM datoteke.
         try:
@@ -50,6 +54,13 @@ class Parser:
                 return False
             if len(l) > 0:
                 lines.append(l)
+
+        for (label, n, func) in self._usedLabels:
+            if not label in self._labels:
+                self._flag = False
+                Parser._error(func, n, "Undefined label \"" + label + "\".")
+                return ""
+
         self._olines = self._olines + lines
         return True
 
@@ -108,9 +119,9 @@ class Parser:
     #   2. loc - lokacija push-a (npr. local 5, loc = 5),
     #   3. n - linija izvornog koda (radi vracanja greske).
     def _push(self, src, loc, n):
-        if not loc.isdigit() or loc.startswith("0") and len(loc3) != 1:
+        if not loc.isdigit() or loc.startswith("0") and len(loc) != 1:
             self._flag = False
-            Parser._error("Push", n, "Invalid value \"" + loc + "\".");
+            Parser._error("Push", n, "Invalid value \"" + loc + "\".")
             return ""
 
         match src:
@@ -142,6 +153,11 @@ class Parser:
     #   2. loc - lokacija pop-a (npr. local 5, loc = 5),
     #   3. n - linija izvornog koda (radi vracanja greske).
     def _pop(self, dst, loc, n):
+        if not loc.isdigit() or loc.startswith("0") and len(loc) != 1:
+            self._flag = False
+            Parser._error("Push", n, "Invalid value \"" + loc + "\".")
+            return ""
+
         if dst == "local":
             l = "@" + str(loc) + "\nD=A\n@LCL\nD=D+M\n@R15\nM=D\n@SP\nAM=M-1\nD=M\n@R15\nA=M\nM=D"
         elif dst == "argument":
@@ -214,12 +230,15 @@ class Parser:
         return l
     
     def _label(self, lab, n):
+        self._labels.append(lab)
         return "(" + self._func + "$" + lab + ")"
     
     def _goto(self, lab, n):
+        self._usedLabels.append((lab, n, "Goto"))
         return "@" + self._func + "$" + lab + "\n0;JMP"
     
     def _ifgoto(self, lab, n):
+        self._usedLabels.append((lab, n, "If-Goto"))
         return "@SP\nAM=M-1\nD=M+1\n@" + self._func + "$" + lab + "\nD;JEQ"
         
     def _function(self, func, nvars, n):

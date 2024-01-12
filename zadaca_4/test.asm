@@ -51,6 +51,11 @@ M=D
 ($EP$)
 @$EP$
 0;JMP
+//goto ll
+@$ll
+0;JMP
+//label ll
+($ll)
 //function Main 0
 (main.Main)
 //push constant 1
