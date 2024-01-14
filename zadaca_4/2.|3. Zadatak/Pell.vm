@@ -1,0 +1,65 @@
+push constant 6
+call Pell.pell 1
+
+label END
+goto END
+
+function Pell.pell 3
+push argument 0
+push constant 0
+eq
+if-goto IS_ZERO
+
+push argument 0
+push constant 1
+eq
+if-goto IS_ONE
+
+push constant 2
+pop local 0
+push constant 0
+pop local 1
+push constant 1
+pop local 2
+
+label LOOP_START
+push argument 0
+push local 0
+eq
+if-goto LOOP_END
+
+push constant 1
+push local 0
+add
+pop local 0
+
+push local 1
+push local 2
+push local 2
+push local 2
+pop local 1
+add
+add
+pop local 2
+
+goto LOOP_START
+
+label LOOP_END
+
+push local 2
+push local 2
+add
+push local 1
+add
+goto RETURN
+
+label IS_ZERO
+push constant 0
+goto RETURN
+
+label IS_ONE
+push constant 1
+goto RETURN
+
+label RETURN
+return
