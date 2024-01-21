@@ -1,0 +1,31 @@
+class Main {
+    function void main() {
+        var Array A;
+        var int n, i;
+        
+        let n = Keyboard.readInt("Unesite duljnu polja: ");
+        let A = Array.new(n);
+        
+        let i = 0;
+        while (i < n) {
+            do Output.printString("Unesite broj ");
+            do Output.printInt(i);
+            do Output.printString(":");
+            let A[i] = Keyboard.readInt("");
+            let i = i + 1;
+        }
+    
+        let A = QSort.qsort(A, n);
+
+        let i = 0;
+        while (i < n) {
+            do Output.printInt(A[i]);
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+
+        do A.dispose();
+
+        return;
+    }
+}
