@@ -1,0 +1,111 @@
+class vint {
+    field Array A;
+    field int size;
+
+    constructor vint new (int n) {
+        var int i;
+        let size = 1;
+
+        let i = 0;
+        while (i < n) {
+            let size = size + size;
+            let i = i + 1;
+        }
+
+        let A = Array.new(size);
+        return this;
+    }
+
+    method int len() {
+        return size;
+    }
+
+    method void set(int k, int v) {
+        let A[k] = v;
+        return;
+    }
+
+    method int get(int k) {
+        return A[k];
+    }
+
+    method void resize(int m) {
+        var int i, newSize;
+        var Array newA;
+
+        let newSize = 1;
+        let i = 0;
+        while (i < m) {
+            let newSize = newSize + newSize;
+            let i = i + 1;
+        }
+
+        if (newSize < size) {
+            let size = newSize;
+        }
+
+        let newA = Array.new(newSize);
+        let i = 0;
+
+        while (i < size) {
+            let newA = A[i];
+            let i = i + 1;
+        }
+
+        let size = newSize;
+        do A.dispose();
+        let A = newA;
+
+        return;
+    }
+
+    function boolean is_eq(vint A, vint B) {
+        var int i;
+
+        if (~(A.len() = A.len())) {
+            return false;
+        }
+
+        let i = 0;
+        while (i < A.len()) {
+            if (~(A.get(i) = B.get(i))) {
+                return false;
+            }
+            let i = i + 1;
+        }
+
+        return true;
+    }
+
+    function boolean elem(vint A, vint B) {
+        var int i, j;
+        var boolean isIn;
+
+        if (~(A.len() = A.len())) {
+            return false;
+        }
+
+        let i = 0;
+        while (i < A.len()) {
+            let j = 0;
+            
+            while (j < A.len()) {
+                if (B.get(j) = A.get(j)) {
+                    let isIn = true;
+                }
+
+                let j = j + 1;
+            }
+
+            if (~(isIn)) {
+                return false;
+            }
+
+            let isIn = false;
+
+            let i = i + 1;
+        }
+
+        return true;
+    }
+}
