@@ -1,0 +1,122 @@
+class vint {
+    field Array A;
+    field int size;
+
+    constructor vint new (int n) {
+        var int i;
+        let size = 1;
+
+        let i = 0;
+        while (i < n) {
+            let size = size + size;
+            let i = i + 1;
+        }
+
+        let A = Array.new(size);
+        return this;
+    }
+
+    method int len() {
+        return size;
+    }
+
+    method void set(int k, int v) {
+        let A[k] = v;
+        return;
+    }
+
+    method int get(int k) {
+        return A[k];
+    }
+
+    method void resize(int m) {
+        var int i, newSize;
+        var Array newA;
+
+        let newSize = 1;
+        let i = 0;
+        while (i < m) {
+            let newSize = newSize + newSize;
+            let i = i + 1;
+        }
+
+        if (newSize < size) {
+            let size = newSize;
+        }
+
+        let newA = Array.new(newSize);
+        let i = 0;
+
+        while (i < size) {
+            let newA = A[i];
+            let i = i + 1;
+        }
+
+        let size = newSize;
+        do A.dispose();
+        let A = newA;
+
+        return;
+    }
+
+    method void dispose(){
+        do A.dispose();
+        return;
+    }
+
+    function boolean is_eq(vint A, vint B) {
+        var int i;
+
+        if (~(A.len() = A.len())) {
+            return false;
+        }
+
+        let i = 0;
+        while (i < A.len()) {
+            if (~(A.get(i) = B.get(i))) {
+                return false;
+            }
+            let i = i + 1;
+        }
+
+        return true;
+    }
+
+    function boolean elem(vint A, vint B) {
+        var vint A1, B1;
+
+        let A1 = vint.sort(0, A.len() - 1);
+        let B1 = vint.sort(0, B.len() - 1);
+
+        return vint.is_eq(A1, B1);
+    }
+
+    method vint sort(int l, int r) {
+        var int pivot, pivotIndex, i, temp;
+        
+        if (~(l < r)) {
+            return A;
+        }
+
+        let pivot = A.get(l);
+        let pivotIndex = l;
+        let i = l + 1;
+        while (~(i > r)) {
+            if (pivot > A.get(i)) {
+                let pivotIndex = pivotIndex + 1;
+                let temp = A.get(pivotIndex);
+                do A.set(pivotIndex, A.get(i));
+                do A.set(i, temp);
+            }
+            let i = i + 1;
+        }
+        let temp = A.get(pivotIndex);
+        do A.set(pivotIndex, pivot);
+        do A.set(l, temp);
+
+        let A = vint.sort(A, l, pivotIndex - 1);
+        let A = vint.sort(A, pivotIndex + 1, r);
+
+        return A;
+    }
+}
