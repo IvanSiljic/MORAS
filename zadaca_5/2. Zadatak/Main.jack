@@ -1,0 +1,63 @@
+class Main {
+    function void main() {
+        var int n, i, input;
+        var vint V1, V2;
+
+        // 2. Zadatak
+        // Upis vektora
+        let n = Keyboard.readInt("Unesite duljnu vectora: ");
+        let V1 = vint.new(n);
+        let V2 = vint.new(n);
+        let n = V1.len();
+
+        let i = 0;
+        while (i < n) {
+            do Output.printString("Unesite broj ");
+            do Output.printInt(i);
+            do Output.printString(":");
+            let input =  Keyboard.readInt("");
+            do V1.set(i, input);
+            do V2.set(i, input);
+            let i = i + 1;
+        }
+
+        // Ispis vektora
+        do Output.printString("Vector: [");
+        let i = 0;
+        let n = n - 1;
+        while (i < n) {
+            do Output.printInt(V1.get(i));
+            do Output.printString(", ");
+            let i = i + 1;
+        }
+        do Output.printInt(V1.get(n));
+        do Output.printString("]");
+        do Output.println();
+
+        // Testiranje len() metode
+        do Output.printString("Vector.len(): ");
+        do Output.printInt(V1.len());
+        do Output.println();
+
+        // Testiranje is_eq() funkcije
+        do Output.printString("is_eq(V1, V2): ");
+        do Output.printInt(vint.is_eq(V1, V2));
+        do Output.println();
+
+        // Testiranje elem() funkcije
+        do V2.sort(0, n - 1);
+        
+        do Output.printString("elem(V1, V2): ");
+        do Output.printInt(vint.elem(V1, V2));
+        do Output.println();
+
+        // Testiranje resize() metode
+        let n = Keyboard.readInt("Upisite novi duzinu vectora: ");
+        do V2.resize(n);
+        do Output.printString("Vector.len(): ");
+        do Output.printInt(V2.len());
+        do Output.println();
+
+        return;
+    }
+}

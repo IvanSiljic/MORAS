@@ -1,0 +1,10 @@
+class Main {
+    function void main() {
+        // 3. Zadatak 
+        // Iscrt koordinatnog sustava
+        do Draw.drawCoordinates();
+        do Draw.drawGraph();
+
+        return;
+    }
+}

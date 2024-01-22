@@ -59,6 +59,11 @@ class vint {
         return;
     }
 
+    method void dispose(){
+        do A.dispose();
+        return;
+    }
+
     function boolean is_eq(vint A, vint B) {
         var int i;
 
@@ -78,34 +83,40 @@ class vint {
     }
 
     function boolean elem(vint A, vint B) {
-        var int i, j;
-        var boolean isIn;
+        var vint A1, B1;
 
-        if (~(A.len() = A.len())) {
-            return false;
+        let A1 = vint.sort(0, A.len() - 1);
+        let B1 = vint.sort(0, B.len() - 1);
+
+        return vint.is_eq(A1, B1);
+    }
+
+    method vint sort(int l, int r) {
+        var int pivot, pivotIndex, i, temp;
+        
+        if (~(l < r)) {
+            return A;
         }
 
-        let i = 0;
-        while (i < A.len()) {
-            let j = 0;
-            
-            while (j < A.len()) {
-                if (B.get(j) = A.get(j)) {
-                    let isIn = true;
-                }
-
-                let j = j + 1;
+        let pivot = A.get(l);
+        let pivotIndex = l;
+        let i = l + 1;
+        while (~(i > r)) {
+            if (pivot > A.get(i)) {
+                let pivotIndex = pivotIndex + 1;
+                let temp = A.get(pivotIndex);
+                do A.set(pivotIndex, A.get(i));
+                do A.set(i, temp);
             }
-
-            if (~(isIn)) {
-                return false;
-            }
-
-            let isIn = false;
-
             let i = i + 1;
         }
+        let temp = A.get(pivotIndex);
+        do A.set(pivotIndex, pivot);
+        do A.set(l, temp);
 
-        return true;
+        let A = vint.sort(A, l, pivotIndex - 1);
+        let A = vint.sort(A, pivotIndex + 1, r);
+
+        return A;
     }
 }

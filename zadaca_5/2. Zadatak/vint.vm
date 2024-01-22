@@ -118,6 +118,14 @@ push local 2
 pop this 0
 push constant 0
 return
+function vint.dispose 0
+push argument 0
+pop pointer 0
+push this 0
+call Array.dispose 1
+pop temp 0
+push constant 0
+return
 function vint.is_eq 1
 push argument 0
 call vint.len 1
@@ -163,73 +171,117 @@ label WHILE_END0
 push constant 0
 not
 return
-function vint.elem 3
+function vint.elem 2
+push argument 0
+push constant 0
 push argument 0
 call vint.len 1
-push argument 0
+push constant 1
+sub
+call vint.sort 3
+pop local 0
+push argument 1
+push constant 0
+push argument 1
 call vint.len 1
-eq
+push constant 1
+sub
+call vint.sort 3
+pop local 1
+push local 0
+push local 1
+call vint.is_eq 2
+return
+function vint.sort 4
+push argument 1
+push argument 2
+lt
 not
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push constant 0
+push argument 0
 return
 label IF_FALSE0
-push constant 0
-pop local 0
-label WHILE_EXP0
-push local 0
 push argument 0
-call vint.len 1
-lt
+push argument 1
+call vint.get 2
+pop local 0
+push argument 1
+pop local 1
+push argument 1
+push constant 1
+add
+pop local 2
+label WHILE_EXP0
+push local 2
+push argument 2
+gt
+not
 not
 if-goto WHILE_END0
-push constant 0
-pop local 1
-label WHILE_EXP1
-push local 1
+push local 0
 push argument 0
-call vint.len 1
-lt
-not
-if-goto WHILE_END1
-push argument 1
-push local 1
+push local 2
 call vint.get 2
-push argument 0
-push local 1
-call vint.get 2
-eq
+gt
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
-push constant 0
-not
-pop local 2
-label IF_FALSE1
 push local 1
 push constant 1
 add
 pop local 1
-goto WHILE_EXP1
-label WHILE_END1
+push argument 0
+push local 1
+call vint.get 2
+pop local 3
+push argument 0
+push local 1
+push argument 0
 push local 2
-not
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push constant 0
-return
-label IF_FALSE2
-push constant 0
-pop local 2
-push local 0
+call vint.get 2
+call vint.set 3
+pop temp 0
+push argument 0
+push local 2
+push local 3
+call vint.set 3
+pop temp 0
+label IF_FALSE1
+push local 2
 push constant 1
 add
-pop local 0
+pop local 2
 goto WHILE_EXP0
 label WHILE_END0
-push constant 0
-not
+push argument 0
+push local 1
+call vint.get 2
+pop local 3
+push argument 0
+push local 1
+push local 0
+call vint.set 3
+pop temp 0
+push argument 0
+push argument 1
+push local 3
+call vint.set 3
+pop temp 0
+push argument 0
+push argument 1
+push local 1
+push constant 1
+sub
+call vint.sort 3
+pop argument 0
+push argument 0
+push local 1
+push constant 1
+add
+push argument 2
+call vint.sort 3
+pop argument 0
+push argument 0
 return
