@@ -1,0 +1,36 @@
+class Main {
+    function void main() {
+        var Sphere object;
+        var bool exit;
+        var int key;
+
+        let object = Sphere.new();
+        do object.draw();
+
+        let exit = false;
+        
+        while (~exit) {
+            let key = Keyboard.keyPressed();
+            
+            // 'ESC'
+            if (key = 140) { let exit = true; }
+            // Up arrow
+            if (key = 131) { do object.rotateY(-5); }
+            // Down arrow
+            if (key = 133) { do object.rotateY(5); }
+            // Left arrow
+            if (key = 130) { do object.rotateX(-5); }
+            // Right arrow
+            if (key = 132) { do object.rotateX(5); }
+        
+            // If arrow keys
+            if ((key > 129) & (key < 134)) {
+                do object.draw();
+            }
+        }
+
+        do object.dispose();
+
+        return;
+    }
+}

@@ -1,0 +1,101 @@
+class Sphere {
+    field int halfWidth, halfHeight;
+    field int radius;
+    field int sqrtRadius;
+    field int rX, rY;
+    field Trig trig;
+
+    constructor Sphere new() {
+        let sqrtRadius = 100;
+        let radius = sqrtRadius * sqrtRadius / 100;
+        let sqrtRadius = sqrtRadius;
+        let halfWidth = 256;
+        let halfHeight = 128;
+
+        do trig.init();
+
+        return this;
+    }
+
+    method void draw() {
+        var int i, j, iHeight, jWidth, i2, j2, a, d, t, px, py, pz, npy, npx, sin_rX, cos_rX, sin_rY, cos_rY, theta, phi, u, v, uv;
+
+        let sin_rX = trig.sin(rX);
+        let cos_rX = trig.sin(90 - rX);
+        let sin_rY = trig.sin(rY);
+        let cos_rY = trig.sin(90 - rY);
+
+        let i = -sqrtRadius;
+        while (i < sqrtRadius) {
+            let iHeight = i + halfHeight;
+            do Screen.setColor(false);
+            do Screen.drawRectangle(156, iHeight - 2, 356, iHeight + 2);
+            do Screen.setColor(true);
+            let i2 = i * i / 100;
+            let j = -sqrtRadius;
+            while (j < sqrtRadius) {
+                let j2 = j * j / 100;
+                if (~(i2 + j2 > radius)) {
+                    let jWidth = j + halfWidth;
+
+                    let a = i2 + j2 + 100;
+                    let d = 2 * (200 - a);
+
+                    if (d > 0) {
+                        // Rjesenje kvadratne jednadzbe sto nam daje udaljenost najblize tocke
+                        let t = ((200 - (Math.sqrt(d) * 10)) * 100) / (2 * a);
+
+                        let px = (t * j) / 100;
+                        let py = (t * i) / 100;
+                        let pz = -100 + t;
+
+                        // rotating point on x-axis
+                        let npy = ((cos_rY * py) / 100) - ((sin_rY * pz) / 100);
+                        let pz = ((sin_rY * py) / 100) + ((cos_rY * pz) / 100);
+                        let py = npy;
+
+                        // rotating point on y-axis
+                        let npx = ((cos_rX * px) / 100) + ((sin_rX * pz) / 100);
+                        let pz = ((-sin_rX * px) / 100) + ((cos_rX * pz) / 100);
+                        let px = npx;
+
+                        let theta = trig.acos(-py);
+                        let phi = trig.atan2(-pz, px) + 314;
+
+                        let u = (phi * 25) / 157;
+                        let v = (theta * 50) / 157;
+
+                        let uv = (u / 5) + (v / 5);
+
+                        if (uv - (uv / 2 * 2) = 0) {
+                            do Screen.drawRectangle(jWidth - 2, iHeight - 2, jWidth + 2, iHeight + 2);
+                        } else {
+                            do Screen.drawRectangle(jWidth - 2, iHeight, jWidth + 2, iHeight);
+                        }
+                    }
+                }
+                let j = j + 4;
+            }
+            let i = i + 4;
+        }
+        return;
+    }
+
+    method void rotateX(int step) {
+        let rX = rX + step;
+        return;
+    }
+
+    method void rotateY(int step) {
+        let rY = rY + step;
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+
+        do trig.dispose();
+
+        return;
+    }
+}

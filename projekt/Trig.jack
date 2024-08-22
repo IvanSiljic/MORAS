@@ -1,0 +1,539 @@
+class Trig {
+    static Array sin;
+    static Array acos;
+    static Array atan;
+
+    method void init() {
+        let sin = Array.new(46);
+
+        let sin[0] = 0;
+        let sin[1] = 8;
+        let sin[2] = 17;
+        let sin[3] = 25;
+        let sin[4] = 34;
+        let sin[5] = 42;
+        let sin[6] = 49;
+        let sin[7] = 57;
+        let sin[8] = 64;
+        let sin[9] = 70;
+        let sin[10] = 76;
+        let sin[11] = 81;
+        let sin[12] = 86;
+        let sin[13] = 90;
+        let sin[14] = 93;
+        let sin[15] = 96;
+        let sin[16] = 98;
+        let sin[17] = 99;
+        let sin[18] = 100;
+        let sin[19] = 99;
+        let sin[20] = 98;
+        let sin[21] = 96;
+        let sin[22] = 93;
+        let sin[23] = 90;
+        let sin[24] = 86;
+        let sin[25] = 81;
+        let sin[26] = 76;
+        let sin[27] = 70;
+        let sin[28] = 64;
+        let sin[29] = 57;
+        let sin[30] = 49;
+        let sin[31] = 42;
+        let sin[32] = 34;
+        let sin[33] = 25;
+        let sin[34] = 17;
+        let sin[35] = 8;
+        let sin[36] = 0;
+
+        let acos = Array.new(101);
+
+        let acos[0] = 157;
+        let acos[1] = 156;
+        let acos[2] = 155;
+        let acos[3] = 154;
+        let acos[4] = 153;
+        let acos[5] = 152;
+        let acos[6] = 151;
+        let acos[7] = 150;
+        let acos[8] = 149;
+        let acos[9] = 148;
+        let acos[10] = 147;
+        let acos[11] = 146;
+        let acos[12] = 145;
+        let acos[13] = 144;
+        let acos[14] = 143;
+        let acos[15] = 142;
+        let acos[16] = 141;
+        let acos[17] = 139;
+        let acos[18] = 138;
+        let acos[19] = 137;
+        let acos[20] = 136;
+        let acos[21] = 135;
+        let acos[22] = 134;
+        let acos[23] = 133;
+        let acos[24] = 132;
+        let acos[25] = 131;
+        let acos[26] = 130;
+        let acos[27] = 129;
+        let acos[28] = 128;
+        let acos[29] = 127;
+        let acos[30] = 126;
+        let acos[31] = 125;
+        let acos[32] = 124;
+        let acos[33] = 123;
+        let acos[34] = 122;
+        let acos[35] = 121;
+        let acos[36] = 120;
+        let acos[37] = 119;
+        let acos[38] = 118;
+        let acos[39] = 117;
+        let acos[40] = 115;
+        let acos[41] = 114;
+        let acos[42] = 113;
+        let acos[43] = 112;
+        let acos[44] = 111;
+        let acos[45] = 110;
+        let acos[46] = 109;
+        let acos[47] = 108;
+        let acos[48] = 107;
+        let acos[49] = 105;
+        let acos[50] = 104;
+        let acos[51] = 103;
+        let acos[52] = 102;
+        let acos[53] = 101;
+        let acos[54] = 100;
+        let acos[55] = 98;
+        let acos[56] = 97;
+        let acos[57] = 96;
+        let acos[58] = 95;
+        let acos[59] = 93;
+        let acos[60] = 92;
+        let acos[61] = 91;
+        let acos[62] = 90;
+        let acos[63] = 88;
+        let acos[64] = 87;
+        let acos[65] = 86;
+        let acos[66] = 84;
+        let acos[67] = 83;
+        let acos[68] = 82;
+        let acos[69] = 80;
+        let acos[70] = 79;
+        let acos[71] = 78;
+        let acos[72] = 76;
+        let acos[73] = 75;
+        let acos[74] = 73;
+        let acos[75] = 72;
+        let acos[76] = 70;
+        let acos[77] = 69;
+        let acos[78] = 67;
+        let acos[79] = 65;
+        let acos[80] = 64;
+        let acos[81] = 62;
+        let acos[82] = 60;
+        let acos[83] = 59;
+        let acos[84] = 57;
+        let acos[85] = 55;
+        let acos[86] = 53;
+        let acos[87] = 51;
+        let acos[88] = 49;
+        let acos[89] = 47;
+        let acos[90] = 45;
+        let acos[91] = 42;
+        let acos[92] = 40;
+        let acos[93] = 37;
+        let acos[94] = 34;
+        let acos[95] = 31;
+        let acos[96] = 28;
+        let acos[97] = 24;
+        let acos[98] = 20;
+        let acos[99] = 14;
+        let acos[100] = 0;
+
+        let atan = Array.new(301);
+
+        let atan[0] = 0;
+        let atan[1] = 0;
+        let atan[2] = 1;
+        let atan[3] = 2;
+        let atan[4] = 3;
+        let atan[5] = 4;
+        let atan[6] = 5;
+        let atan[7] = 6;
+        let atan[8] = 7;
+        let atan[9] = 8;
+        let atan[10] = 9;
+        let atan[11] = 10;
+        let atan[12] = 11;
+        let atan[13] = 12;
+        let atan[14] = 13;
+        let atan[15] = 14;
+        let atan[16] = 15;
+        let atan[17] = 16;
+        let atan[18] = 17;
+        let atan[19] = 18;
+        let atan[20] = 19;
+        let atan[21] = 20;
+        let atan[22] = 21;
+        let atan[23] = 22;
+        let atan[24] = 23;
+        let atan[25] = 24;
+        let atan[26] = 25;
+        let atan[27] = 26;
+        let atan[28] = 27;
+        let atan[29] = 28;
+        let atan[30] = 29;
+        let atan[31] = 30;
+        let atan[32] = 30;
+        let atan[33] = 31;
+        let atan[34] = 32;
+        let atan[35] = 33;
+        let atan[36] = 34;
+        let atan[37] = 35;
+        let atan[38] = 36;
+        let atan[39] = 37;
+        let atan[40] = 38;
+        let atan[41] = 38;
+        let atan[42] = 39;
+        let atan[43] = 40;
+        let atan[44] = 41;
+        let atan[45] = 42;
+        let atan[46] = 43;
+        let atan[47] = 43;
+        let atan[48] = 44;
+        let atan[49] = 45;
+        let atan[50] = 46;
+        let atan[51] = 47;
+        let atan[52] = 47;
+        let atan[53] = 48;
+        let atan[54] = 49;
+        let atan[55] = 50;
+        let atan[56] = 51;
+        let atan[57] = 51;
+        let atan[58] = 52;
+        let atan[59] = 53;
+        let atan[60] = 54;
+        let atan[61] = 54;
+        let atan[62] = 55;
+        let atan[63] = 56;
+        let atan[64] = 56;
+        let atan[65] = 57;
+        let atan[66] = 58;
+        let atan[67] = 59;
+        let atan[68] = 59;
+        let atan[69] = 60;
+        let atan[70] = 61;
+        let atan[71] = 61;
+        let atan[72] = 62;
+        let atan[73] = 63;
+        let atan[74] = 63;
+        let atan[75] = 64;
+        let atan[76] = 64;
+        let atan[77] = 65;
+        let atan[78] = 66;
+        let atan[79] = 66;
+        let atan[80] = 67;
+        let atan[81] = 68;
+        let atan[82] = 68;
+        let atan[83] = 69;
+        let atan[84] = 69;
+        let atan[85] = 70;
+        let atan[86] = 71;
+        let atan[87] = 71;
+        let atan[88] = 72;
+        let atan[89] = 72;
+        let atan[90] = 73;
+        let atan[91] = 73;
+        let atan[92] = 74;
+        let atan[93] = 74;
+        let atan[94] = 75;
+        let atan[95] = 75;
+        let atan[96] = 76;
+        let atan[97] = 77;
+        let atan[98] = 77;
+        let atan[99] = 78;
+        let atan[100] = 78;
+        let atan[101] = 79;
+        let atan[102] = 79;
+        let atan[103] = 80;
+        let atan[104] = 80;
+        let atan[105] = 80;
+        let atan[106] = 81;
+        let atan[107] = 81;
+        let atan[108] = 82;
+        let atan[109] = 82;
+        let atan[110] = 83;
+        let atan[111] = 83;
+        let atan[112] = 84;
+        let atan[113] = 84;
+        let atan[114] = 85;
+        let atan[115] = 85;
+        let atan[116] = 85;
+        let atan[117] = 86;
+        let atan[118] = 86;
+        let atan[119] = 87;
+        let atan[120] = 87;
+        let atan[121] = 88;
+        let atan[122] = 88;
+        let atan[123] = 88;
+        let atan[124] = 89;
+        let atan[125] = 89;
+        let atan[126] = 89;
+        let atan[127] = 90;
+        let atan[128] = 90;
+        let atan[129] = 91;
+        let atan[130] = 91;
+        let atan[131] = 91;
+        let atan[132] = 92;
+        let atan[133] = 92;
+        let atan[134] = 92;
+        let atan[135] = 93;
+        let atan[136] = 93;
+        let atan[137] = 94;
+        let atan[138] = 94;
+        let atan[139] = 94;
+        let atan[140] = 95;
+        let atan[141] = 95;
+        let atan[142] = 95;
+        let atan[143] = 96;
+        let atan[144] = 96;
+        let atan[145] = 96;
+        let atan[146] = 97;
+        let atan[147] = 97;
+        let atan[148] = 97;
+        let atan[149] = 97;
+        let atan[150] = 98;
+        let atan[151] = 98;
+        let atan[152] = 98;
+        let atan[153] = 99;
+        let atan[154] = 99;
+        let atan[155] = 99;
+        let atan[156] = 100;
+        let atan[157] = 100;
+        let atan[158] = 100;
+        let atan[159] = 100;
+        let atan[160] = 101;
+        let atan[161] = 101;
+        let atan[162] = 101;
+        let atan[163] = 102;
+        let atan[164] = 102;
+        let atan[165] = 102;
+        let atan[166] = 102;
+        let atan[167] = 103;
+        let atan[168] = 103;
+        let atan[169] = 103;
+        let atan[170] = 103;
+        let atan[171] = 104;
+        let atan[172] = 104;
+        let atan[173] = 104;
+        let atan[174] = 104;
+        let atan[175] = 105;
+        let atan[176] = 105;
+        let atan[177] = 105;
+        let atan[178] = 105;
+        let atan[179] = 106;
+        let atan[180] = 106;
+        let atan[181] = 106;
+        let atan[182] = 106;
+        let atan[183] = 107;
+        let atan[184] = 107;
+        let atan[185] = 107;
+        let atan[186] = 107;
+        let atan[187] = 107;
+        let atan[188] = 108;
+        let atan[189] = 108;
+        let atan[190] = 108;
+        let atan[191] = 108;
+        let atan[192] = 109;
+        let atan[193] = 109;
+        let atan[194] = 109;
+        let atan[195] = 109;
+        let atan[196] = 109;
+        let atan[197] = 110;
+        let atan[198] = 110;
+        let atan[199] = 110;
+        let atan[200] = 110;
+        let atan[201] = 110;
+        let atan[202] = 111;
+        let atan[203] = 111;
+        let atan[204] = 111;
+        let atan[205] = 111;
+        let atan[206] = 111;
+        let atan[207] = 112;
+        let atan[208] = 112;
+        let atan[209] = 112;
+        let atan[210] = 112;
+        let atan[211] = 112;
+        let atan[212] = 113;
+        let atan[213] = 113;
+        let atan[214] = 113;
+        let atan[215] = 113;
+        let atan[216] = 113;
+        let atan[217] = 113;
+        let atan[218] = 114;
+        let atan[219] = 114;
+        let atan[220] = 114;
+        let atan[221] = 114;
+        let atan[222] = 114;
+        let atan[223] = 114;
+        let atan[224] = 115;
+        let atan[225] = 115;
+        let atan[226] = 115;
+        let atan[227] = 115;
+        let atan[228] = 115;
+        let atan[229] = 115;
+        let atan[230] = 116;
+        let atan[231] = 116;
+        let atan[232] = 116;
+        let atan[233] = 116;
+        let atan[234] = 116;
+        let atan[235] = 116;
+        let atan[236] = 117;
+        let atan[237] = 117;
+        let atan[238] = 117;
+        let atan[239] = 117;
+        let atan[240] = 117;
+        let atan[241] = 117;
+        let atan[242] = 117;
+        let atan[243] = 118;
+        let atan[244] = 118;
+        let atan[245] = 118;
+        let atan[246] = 118;
+        let atan[247] = 118;
+        let atan[248] = 118;
+        let atan[249] = 118;
+        let atan[250] = 119;
+        let atan[251] = 119;
+        let atan[252] = 119;
+        let atan[253] = 119;
+        let atan[254] = 119;
+        let atan[255] = 119;
+        let atan[256] = 119;
+        let atan[257] = 119;
+        let atan[258] = 120;
+        let atan[259] = 120;
+        let atan[260] = 120;
+        let atan[261] = 120;
+        let atan[262] = 120;
+        let atan[263] = 120;
+        let atan[264] = 120;
+        let atan[265] = 120;
+        let atan[266] = 121;
+        let atan[267] = 121;
+        let atan[268] = 121;
+        let atan[269] = 121;
+        let atan[270] = 121;
+        let atan[271] = 121;
+        let atan[272] = 121;
+        let atan[273] = 121;
+        let atan[274] = 122;
+        let atan[275] = 122;
+        let atan[276] = 122;
+        let atan[277] = 122;
+        let atan[278] = 122;
+        let atan[279] = 122;
+        let atan[280] = 122;
+        let atan[281] = 122;
+        let atan[282] = 123;
+        let atan[283] = 123;
+        let atan[284] = 123;
+        let atan[285] = 123;
+        let atan[286] = 123;
+        let atan[287] = 123;
+        let atan[288] = 123;
+        let atan[289] = 123;
+        let atan[290] = 123;
+        let atan[291] = 123;
+        let atan[292] = 124;
+        let atan[293] = 124;
+        let atan[294] = 124;
+        let atan[295] = 124;
+        let atan[296] = 124;
+        let atan[297] = 124;
+        let atan[298] = 124;
+        let atan[299] = 124;
+        let atan[300] = 124;
+
+        return;
+    }
+
+    method int sin(int angle) {
+        var int ret, nAngle;
+        let ret = 1;
+
+        if (angle < 0) {
+            let ret = -1;
+            let angle = -angle;
+        }
+
+        let nAngle = angle - (angle / 360 * 360);
+
+        if (nAngle > 180) {
+            let ret = -ret * sin[(360 - nAngle) / 5];
+        } else {
+            let ret = ret * sin[nAngle / 5];
+        }
+
+        return ret;
+    }
+
+    method int acos(int x) {
+        var int ret;
+
+        if (x < 0) {
+            let ret = 314 - acos[-x];
+        } else {
+            let ret = acos[x];
+        }
+
+        return ret;
+    }
+
+    method int atan(int x) {
+        if (x > 300) {
+            return 156; // Approximate value for very large arguments
+        }
+        if (x < -300) {
+            return -156;
+        }
+
+        if (x < 0) {
+            return -atan[-x];
+        } else {
+            return atan[x];
+        }
+    }
+
+method int atan2(int y, int x) {
+        if (x > 0) {
+            return atan((y * 100) / x);
+        }
+        
+        if (x < 0) {
+            if (y < 0) {
+                return atan((y * 100) / x) - 314;
+            } else {
+                return atan((y * 100) / x) + 314;
+            }
+            
+        }
+
+        if (x = 0) {
+            if (y = 0) {
+                return 0;
+            }
+            if (y > 0) {
+                return 157;
+            } else {
+                return -157;
+            }
+        }
+        return 0;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(sin);
+        do Memory.deAlloc(acos);
+        do Memory.deAlloc(atan);
+
+        return;
+    }
+}
