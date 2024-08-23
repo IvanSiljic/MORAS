@@ -9,8 +9,9 @@ int main() {
 
     Trig << "class Trig {\n"
             "    static Array sin;\n"
-            "    static Array acos;\n"
+            "    static Array v;\n"
             "    static Array atan;\n"
+            "    static Array t;\n"
             "\n"
             "    method void init() {\n"
             "        let sin = Array.new(46);\n\n";
@@ -20,18 +21,29 @@ int main() {
         Trig << "        let sin[" << i << "] = " << (int)(sin(i * 5 * M_PI / 180.f) * 100) << ";\n";
     }
 
-    Trig << "\n        let acos = Array.new(101);\n\n";
+    Trig << "\n        let v = Array.new(143);\n\n";
 
-    // Fill the acos array
-    for (int i = 0; i < 101; i++) {
-        Trig << "        let acos[" << i << "] = " << (int)(acos(i / 100.) * 100) << ";\n";
+    // Fill the v array
+    for (int i = -71; i <= 71; i++) {
+        float theta = acos(i / 100.f);
+        Trig << "        let v[" << i + 71 << "] = " << (int)(theta / M_PI * 100) << ";\n";
     }
 
-    Trig << "\n        let atan = Array.new(301);\n\n";
+    int atanSize = 301;
+    Trig << "\n        let atan = Array.new(" << atanSize << ");\n\n";
 
     // Fill the atan array
-    for (int i = 0; i < 301; i++) {
+    for (int i = 0; i < atanSize; i++) {
         Trig << "        let atan[" << i << "] = " << (int)(atan(i / 100.) * 100) << ";\n";
+    }
+
+    Trig << "\n        let t = Array.new(201);\n\n";
+
+    // Fill the t array
+    for (int i = 0; i < 101; i++) {
+        float a = (float)(i + 100) / 100.f;
+        float d = 2.f * (2.f - a);
+        Trig << "        let t[" << i << "] = " << (int)((2.f - sqrt(d)) / (2.f * a) * 100) << ";\n";
     }
 
     Trig << "\n        return;\n    }\n\n";
@@ -58,24 +70,16 @@ int main() {
             "    }\n\n";
 
     // Acos function
-    Trig << "    method int acos(int x) {\n"
-            "        var int ret;\n"
-            "\n"
-            "        if (x < 0) {\n"
-            "            let ret = 314 - acos[-x];\n"
-            "        } else {\n"
-            "            let ret = acos[x];\n"
-            "        }\n"
-            "\n"
-            "        return ret;\n"
+    Trig << "    method int getV(int x) {\n"
+            "        return v[x + 71];\n"
             "    }\n\n";
 
     // Atan function
     Trig << "    method int atan(int x) {\n"
-            "        if (x > 300) {\n"
+            "        if (x > " << atanSize << ") {\n"
             "            return 156; // Approximate value for very large arguments\n"
             "        }\n"
-            "        if (x < -300) {\n"
+            "        if (x < -" << atanSize << ") {\n"
             "            return -156;\n"
             "        }\n"
             "\n"
@@ -88,7 +92,7 @@ int main() {
 
     // Atan2 function
     Trig << "\n"
-            "method int atan2(int y, int x) {\n"
+            "    method int atan2(int y, int x) {\n"
             "        if (x > 0) {\n"
             "            return atan((y * 100) / x);\n"
             "        }\n"
@@ -115,11 +119,16 @@ int main() {
             "        return 0;\n"
             "    }\n\n";
 
+    Trig << "    function int getT(int x) {\n"
+            "        return t[x];\n"
+            "    }\n\n";
+
     // Dispose function
     Trig << "    method void dispose() {\n"
             "        do Memory.deAlloc(sin);\n"
-            "        do Memory.deAlloc(acos);\n"
+            "        do Memory.deAlloc(v);\n"
             "        do Memory.deAlloc(atan);\n"
+            "        do Memory.deAlloc(t);\n"
             "\n"
             "        return;\n"
             "    }\n"
