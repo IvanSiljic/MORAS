@@ -3,14 +3,15 @@ class Sphere {
     field int radius;
     field int sqrtRadius;
     field int rX, rY;
+    field int resolution;
     field Trig trig;
 
     constructor Sphere new() {
         let sqrtRadius = 100;
-        let radius = sqrtRadius * sqrtRadius / 100;
-        let sqrtRadius = sqrtRadius;
+        let radius = 100;
         let halfWidth = 256;
         let halfHeight = 128;
+        let resolution = 2;
 
         do trig.init();
 
@@ -18,7 +19,7 @@ class Sphere {
     }
 
     method void draw() {
-        var int i, j, iHeight, jWidth, i2, j2, a, d, t, px, py, pz, npy, npx, sin_rX, cos_rX, sin_rY, cos_rY, theta, phi, u, v, uv;
+        var int i, j, iHeight, jWidth, i2, j2, a, t, px, py, pz, npy, npx, sin_rX, cos_rX, sin_rY, cos_rY, phi, u, v, uv;
 
         let sin_rX = trig.sin(rX);
         let cos_rX = trig.sin(90 - rX);
@@ -29,7 +30,7 @@ class Sphere {
         while (i < sqrtRadius) {
             let iHeight = i + halfHeight;
             do Screen.setColor(false);
-            do Screen.drawRectangle(156, iHeight - 2, 356, iHeight + 2);
+            do Screen.drawRectangle(156, iHeight - resolution, 356, iHeight + resolution);
             do Screen.setColor(true);
             let i2 = i * i / 100;
             let j = -sqrtRadius;
@@ -38,12 +39,11 @@ class Sphere {
                 if (~(i2 + j2 > radius)) {
                     let jWidth = j + halfWidth;
 
-                    let a = i2 + j2 + 100;
-                    let d = 2 * (200 - a);
+                    let a = i2 + j2;
 
-                    if (d > 0) {
+                    if (a < 101) {
                         // Rjesenje kvadratne jednadzbe sto nam daje udaljenost najblize tocke
-                        let t = ((200 - (Math.sqrt(d) * 10)) * 100) / (2 * a);
+                        let t = Trig.getT(a);
 
                         let px = (t * j) / 100;
                         let py = (t * i) / 100;
@@ -59,24 +59,23 @@ class Sphere {
                         let pz = ((-sin_rX * px) / 100) + ((cos_rX * pz) / 100);
                         let px = npx;
 
-                        let theta = trig.acos(-py);
                         let phi = trig.atan2(-pz, px) + 314;
 
                         let u = (phi * 25) / 157;
-                        let v = (theta * 50) / 157;
+                        let v = trig.getV(-py);
 
                         let uv = (u / 5) + (v / 5);
 
                         if (uv - (uv / 2 * 2) = 0) {
-                            do Screen.drawRectangle(jWidth - 2, iHeight - 2, jWidth + 2, iHeight + 2);
+                            do Screen.drawRectangle(jWidth - resolution, iHeight - resolution, jWidth + resolution, iHeight + resolution);
                         } else {
-                            do Screen.drawRectangle(jWidth - 2, iHeight, jWidth + 2, iHeight);
+                            do Screen.drawRectangle(jWidth - resolution, iHeight, jWidth + resolution, iHeight);
                         }
                     }
                 }
-                let j = j + 4;
+                let j = j + (resolution * 2);
             }
-            let i = i + 4;
+            let i = i + (resolution * 2);
         }
         return;
     }
@@ -91,10 +90,26 @@ class Sphere {
         return;
     }
 
-    method void dispose() {
-        do Memory.deAlloc(this);
+    method void changeRes(int x) {
+        if (resolution + x < 1) {
+            return;
+        }
 
+        if (resolution + x > 10) {
+            return;
+        }
+
+        let resolution = resolution + x;
+        return;
+    }
+    
+    method int getRes() {
+        return resolution;
+    }
+
+    method void dispose() {
         do trig.dispose();
+        do Memory.deAlloc(this);
 
         return;
     }

@@ -2,14 +2,18 @@ class Main {
     function void main() {
         var Sphere object;
         var bool exit;
-        var int key;
+        var int prevKey, key;
 
         let object = Sphere.new();
+
+        do Main.printMenu(object.getRes());
+
         do object.draw();
 
         let exit = false;
-        
+
         while (~exit) {
+            let prevKey = key;
             let key = Keyboard.keyPressed();
             
             // 'ESC'
@@ -22,14 +26,48 @@ class Main {
             if (key = 130) { do object.rotateX(-5); }
             // Right arrow
             if (key = 132) { do object.rotateX(5); }
-        
+
+            if (~(prevKey = key)) {
+                // -
+                if (key = 68) {
+                    do object.changeRes(-1);
+                    do Screen.clearScreen();
+                    do Main.printMenu(object.getRes());
+                    do object.draw();
+                }
+                // +
+                if (key = 73) {
+                    do object.changeRes(1);
+                    do Screen.clearScreen();
+                    do Main.printMenu(object.getRes());
+                    do object.draw();
+                } 
+            }
+
             // If arrow keys
             if ((key > 129) & (key < 134)) {
                 do object.draw();
             }
         }
 
+        do Screen.clearScreen();
+
         do object.dispose();
+
+        return;
+    }
+
+    function void printMenu(int res) {
+        do Output.moveCursor(0, 0);
+        do Output.printString("Resolution: ");
+        do Output.printInt(res);
+        do Output.printString(" (I/D)");
+
+        do Output.moveCursor(21, 0);
+        do Output.printString("Rotate  ARROW KEYS");
+
+        do Output.println();
+        do Output.printString("Exit    ESC");
 
         return;
     }

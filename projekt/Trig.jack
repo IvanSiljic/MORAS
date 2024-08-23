@@ -1,7 +1,8 @@
 class Trig {
     static Array sin;
-    static Array acos;
+    static Array v;
     static Array atan;
+    static Array t;
 
     method void init() {
         let sin = Array.new(46);
@@ -44,109 +45,151 @@ class Trig {
         let sin[35] = 8;
         let sin[36] = 0;
 
-        let acos = Array.new(101);
+        let v = Array.new(143);
 
-        let acos[0] = 157;
-        let acos[1] = 156;
-        let acos[2] = 155;
-        let acos[3] = 154;
-        let acos[4] = 153;
-        let acos[5] = 152;
-        let acos[6] = 151;
-        let acos[7] = 150;
-        let acos[8] = 149;
-        let acos[9] = 148;
-        let acos[10] = 147;
-        let acos[11] = 146;
-        let acos[12] = 145;
-        let acos[13] = 144;
-        let acos[14] = 143;
-        let acos[15] = 142;
-        let acos[16] = 141;
-        let acos[17] = 139;
-        let acos[18] = 138;
-        let acos[19] = 137;
-        let acos[20] = 136;
-        let acos[21] = 135;
-        let acos[22] = 134;
-        let acos[23] = 133;
-        let acos[24] = 132;
-        let acos[25] = 131;
-        let acos[26] = 130;
-        let acos[27] = 129;
-        let acos[28] = 128;
-        let acos[29] = 127;
-        let acos[30] = 126;
-        let acos[31] = 125;
-        let acos[32] = 124;
-        let acos[33] = 123;
-        let acos[34] = 122;
-        let acos[35] = 121;
-        let acos[36] = 120;
-        let acos[37] = 119;
-        let acos[38] = 118;
-        let acos[39] = 117;
-        let acos[40] = 115;
-        let acos[41] = 114;
-        let acos[42] = 113;
-        let acos[43] = 112;
-        let acos[44] = 111;
-        let acos[45] = 110;
-        let acos[46] = 109;
-        let acos[47] = 108;
-        let acos[48] = 107;
-        let acos[49] = 105;
-        let acos[50] = 104;
-        let acos[51] = 103;
-        let acos[52] = 102;
-        let acos[53] = 101;
-        let acos[54] = 100;
-        let acos[55] = 98;
-        let acos[56] = 97;
-        let acos[57] = 96;
-        let acos[58] = 95;
-        let acos[59] = 93;
-        let acos[60] = 92;
-        let acos[61] = 91;
-        let acos[62] = 90;
-        let acos[63] = 88;
-        let acos[64] = 87;
-        let acos[65] = 86;
-        let acos[66] = 84;
-        let acos[67] = 83;
-        let acos[68] = 82;
-        let acos[69] = 80;
-        let acos[70] = 79;
-        let acos[71] = 78;
-        let acos[72] = 76;
-        let acos[73] = 75;
-        let acos[74] = 73;
-        let acos[75] = 72;
-        let acos[76] = 70;
-        let acos[77] = 69;
-        let acos[78] = 67;
-        let acos[79] = 65;
-        let acos[80] = 64;
-        let acos[81] = 62;
-        let acos[82] = 60;
-        let acos[83] = 59;
-        let acos[84] = 57;
-        let acos[85] = 55;
-        let acos[86] = 53;
-        let acos[87] = 51;
-        let acos[88] = 49;
-        let acos[89] = 47;
-        let acos[90] = 45;
-        let acos[91] = 42;
-        let acos[92] = 40;
-        let acos[93] = 37;
-        let acos[94] = 34;
-        let acos[95] = 31;
-        let acos[96] = 28;
-        let acos[97] = 24;
-        let acos[98] = 20;
-        let acos[99] = 14;
-        let acos[100] = 0;
+        let v[0] = 75;
+        let v[1] = 74;
+        let v[2] = 74;
+        let v[3] = 73;
+        let v[4] = 73;
+        let v[5] = 72;
+        let v[6] = 72;
+        let v[7] = 72;
+        let v[8] = 71;
+        let v[9] = 71;
+        let v[10] = 70;
+        let v[11] = 70;
+        let v[12] = 70;
+        let v[13] = 69;
+        let v[14] = 69;
+        let v[15] = 68;
+        let v[16] = 68;
+        let v[17] = 68;
+        let v[18] = 67;
+        let v[19] = 67;
+        let v[20] = 67;
+        let v[21] = 66;
+        let v[22] = 66;
+        let v[23] = 65;
+        let v[24] = 65;
+        let v[25] = 65;
+        let v[26] = 64;
+        let v[27] = 64;
+        let v[28] = 64;
+        let v[29] = 63;
+        let v[30] = 63;
+        let v[31] = 63;
+        let v[32] = 62;
+        let v[33] = 62;
+        let v[34] = 62;
+        let v[35] = 61;
+        let v[36] = 61;
+        let v[37] = 61;
+        let v[38] = 60;
+        let v[39] = 60;
+        let v[40] = 60;
+        let v[41] = 59;
+        let v[42] = 59;
+        let v[43] = 59;
+        let v[44] = 58;
+        let v[45] = 58;
+        let v[46] = 58;
+        let v[47] = 57;
+        let v[48] = 57;
+        let v[49] = 57;
+        let v[50] = 56;
+        let v[51] = 56;
+        let v[52] = 56;
+        let v[53] = 55;
+        let v[54] = 55;
+        let v[55] = 55;
+        let v[56] = 54;
+        let v[57] = 54;
+        let v[58] = 54;
+        let v[59] = 53;
+        let v[60] = 53;
+        let v[61] = 53;
+        let v[62] = 52;
+        let v[63] = 52;
+        let v[64] = 52;
+        let v[65] = 51;
+        let v[66] = 51;
+        let v[67] = 51;
+        let v[68] = 50;
+        let v[69] = 50;
+        let v[70] = 50;
+        let v[71] = 50;
+        let v[72] = 49;
+        let v[73] = 49;
+        let v[74] = 49;
+        let v[75] = 48;
+        let v[76] = 48;
+        let v[77] = 48;
+        let v[78] = 47;
+        let v[79] = 47;
+        let v[80] = 47;
+        let v[81] = 46;
+        let v[82] = 46;
+        let v[83] = 46;
+        let v[84] = 45;
+        let v[85] = 45;
+        let v[86] = 45;
+        let v[87] = 44;
+        let v[88] = 44;
+        let v[89] = 44;
+        let v[90] = 43;
+        let v[91] = 43;
+        let v[92] = 43;
+        let v[93] = 42;
+        let v[94] = 42;
+        let v[95] = 42;
+        let v[96] = 41;
+        let v[97] = 41;
+        let v[98] = 41;
+        let v[99] = 40;
+        let v[100] = 40;
+        let v[101] = 40;
+        let v[102] = 39;
+        let v[103] = 39;
+        let v[104] = 39;
+        let v[105] = 38;
+        let v[106] = 38;
+        let v[107] = 38;
+        let v[108] = 37;
+        let v[109] = 37;
+        let v[110] = 37;
+        let v[111] = 36;
+        let v[112] = 36;
+        let v[113] = 36;
+        let v[114] = 35;
+        let v[115] = 35;
+        let v[116] = 35;
+        let v[117] = 34;
+        let v[118] = 34;
+        let v[119] = 34;
+        let v[120] = 33;
+        let v[121] = 33;
+        let v[122] = 32;
+        let v[123] = 32;
+        let v[124] = 32;
+        let v[125] = 31;
+        let v[126] = 31;
+        let v[127] = 31;
+        let v[128] = 30;
+        let v[129] = 30;
+        let v[130] = 29;
+        let v[131] = 29;
+        let v[132] = 29;
+        let v[133] = 28;
+        let v[134] = 28;
+        let v[135] = 27;
+        let v[136] = 27;
+        let v[137] = 27;
+        let v[138] = 26;
+        let v[139] = 26;
+        let v[140] = 25;
+        let v[141] = 25;
+        let v[142] = 24;
 
         let atan = Array.new(301);
 
@@ -452,6 +495,110 @@ class Trig {
         let atan[299] = 124;
         let atan[300] = 124;
 
+        let t = Array.new(201);
+
+        let t[0] = 29;
+        let t[1] = 29;
+        let t[2] = 29;
+        let t[3] = 29;
+        let t[4] = 29;
+        let t[5] = 29;
+        let t[6] = 29;
+        let t[7] = 29;
+        let t[8] = 29;
+        let t[9] = 29;
+        let t[10] = 29;
+        let t[11] = 29;
+        let t[12] = 30;
+        let t[13] = 30;
+        let t[14] = 30;
+        let t[15] = 30;
+        let t[16] = 30;
+        let t[17] = 30;
+        let t[18] = 30;
+        let t[19] = 30;
+        let t[20] = 30;
+        let t[21] = 30;
+        let t[22] = 30;
+        let t[23] = 30;
+        let t[24] = 30;
+        let t[25] = 31;
+        let t[26] = 31;
+        let t[27] = 31;
+        let t[28] = 31;
+        let t[29] = 31;
+        let t[30] = 31;
+        let t[31] = 31;
+        let t[32] = 31;
+        let t[33] = 31;
+        let t[34] = 31;
+        let t[35] = 31;
+        let t[36] = 31;
+        let t[37] = 32;
+        let t[38] = 32;
+        let t[39] = 32;
+        let t[40] = 32;
+        let t[41] = 32;
+        let t[42] = 32;
+        let t[43] = 32;
+        let t[44] = 32;
+        let t[45] = 32;
+        let t[46] = 32;
+        let t[47] = 33;
+        let t[48] = 33;
+        let t[49] = 33;
+        let t[50] = 33;
+        let t[51] = 33;
+        let t[52] = 33;
+        let t[53] = 33;
+        let t[54] = 33;
+        let t[55] = 33;
+        let t[56] = 34;
+        let t[57] = 34;
+        let t[58] = 34;
+        let t[59] = 34;
+        let t[60] = 34;
+        let t[61] = 34;
+        let t[62] = 34;
+        let t[63] = 34;
+        let t[64] = 35;
+        let t[65] = 35;
+        let t[66] = 35;
+        let t[67] = 35;
+        let t[68] = 35;
+        let t[69] = 35;
+        let t[70] = 36;
+        let t[71] = 36;
+        let t[72] = 36;
+        let t[73] = 36;
+        let t[74] = 36;
+        let t[75] = 36;
+        let t[76] = 37;
+        let t[77] = 37;
+        let t[78] = 37;
+        let t[79] = 37;
+        let t[80] = 37;
+        let t[81] = 38;
+        let t[82] = 38;
+        let t[83] = 38;
+        let t[84] = 38;
+        let t[85] = 39;
+        let t[86] = 39;
+        let t[87] = 39;
+        let t[88] = 40;
+        let t[89] = 40;
+        let t[90] = 40;
+        let t[91] = 41;
+        let t[92] = 41;
+        let t[93] = 42;
+        let t[94] = 42;
+        let t[95] = 43;
+        let t[96] = 43;
+        let t[97] = 44;
+        let t[98] = 45;
+        let t[99] = 46;
+        let t[100] = 50;
+
         return;
     }
 
@@ -475,23 +622,15 @@ class Trig {
         return ret;
     }
 
-    method int acos(int x) {
-        var int ret;
-
-        if (x < 0) {
-            let ret = 314 - acos[-x];
-        } else {
-            let ret = acos[x];
-        }
-
-        return ret;
+    method int getV(int x) {
+        return v[x + 71];
     }
 
     method int atan(int x) {
-        if (x > 300) {
+        if (x > 301) {
             return 156; // Approximate value for very large arguments
         }
-        if (x < -300) {
+        if (x < -301) {
             return -156;
         }
 
@@ -502,7 +641,7 @@ class Trig {
         }
     }
 
-method int atan2(int y, int x) {
+    method int atan2(int y, int x) {
         if (x > 0) {
             return atan((y * 100) / x);
         }
@@ -529,10 +668,15 @@ method int atan2(int y, int x) {
         return 0;
     }
 
+    function int getT(int x) {
+        return t[x];
+    }
+
     method void dispose() {
         do Memory.deAlloc(sin);
-        do Memory.deAlloc(acos);
+        do Memory.deAlloc(v);
         do Memory.deAlloc(atan);
+        do Memory.deAlloc(t);
 
         return;
     }
