@@ -7,7 +7,7 @@ class Sphere {
     field Trig trig;
 
     constructor Sphere new() {
-        let sqrtRadius = 100;
+        let sqrtRadius = 104;
         let radius = 100;
         let halfWidth = 256;
         let halfHeight = 128;
@@ -95,11 +95,12 @@ class Sphere {
             return;
         }
 
-        if (resolution + x > 10) {
+        if (resolution + x > 5) {
             return;
         }
 
         let resolution = resolution + x;
+        let sqrtRadius = 100 + (resolution * 2);
         return;
     }
     

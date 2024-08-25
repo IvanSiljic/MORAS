@@ -1,0 +1,22 @@
+/*
+	Square game.
+   
+*/
+
+class Square
+{
+	static int i, j;
+	field char c;
+	static string s;
+	field boolean u, v, w, x, y, z;
+    
+    method void test(int no, int ob, char test)
+	{
+        var int deb, abc;
+        var char c;
+        
+        
+        return;
+	}
+
+}
